@@ -25,6 +25,27 @@ c.DockerSpawner.use_internal_ip = True
 c.DockerSpawner.network_name = network_name
 c.DockerSpawner.extra_host_config = {'network_mode': network_name}
 
+NOTEBOOK_DIR = '/home/jovyan/work'
+HOST_HOME_PATH = "/home"
+HOST_USER_PATH = HOST_HOME_PATH + "/{username}"
+HOST_NOTEBOOK_PATH = f"{HOST_USER_PATH}/work"
+
+c.DockerSpawner.notebook_dir = NOTEBOOK_DIR
+
+c.DockerSpawner.remove = True
+c.DockerSpawner.extra_create_kwargs = {'user': 'root'}
+c.DockerSpawner.environment = {
+    "CHOWN_HOME": "yes",
+    "CHOWN_EXTRA": "/home/jovyan",
+    "CHOWN_HOME_OPTS": "-R",
+    "NB_UID": 1000,
+    "NB_GID": 1000,
+}
+
+c.DockerSpawner.volumes = {
+    f"{HOST_NOTEBOOK_PATH}": NOTEBOOK_DIR
+}
+
 # Allows multiple single-server per user
 c.JupyterHub.allow_named_servers = False
 
