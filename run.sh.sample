@@ -1,0 +1,8 @@
+#!/bin/sh
+export GITHUB_CLIENT_ID=
+export GITHUB_CLIENT_SECRET=
+export OAUTH_CALLBACK_URL=
+export CONFIGPROXY_AUTH_TOKEN=
+export NETWORK_NAME=
+
+jupyterhub -f jupyterhub_config.py --ip=0.0.0.0
